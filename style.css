@@ -48,3 +48,24 @@ dialog {
 
     
 }
+
+.section-flex {
+    display: flex;
+    flex-flow: row, wrap;
+    justify-content: flex-start;
+    border: 2px dashed green;
+}
+
+/*TODO style div cards in a basic way (shape and size) */
+
+.card-style {
+    
+    border: 2px double orange;
+    font-size: 4rem;
+    height: 70rem;
+    width: 45rem;
+    margin-left: 2rem;
+
+
+
+}

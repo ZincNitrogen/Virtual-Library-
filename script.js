@@ -3,12 +3,14 @@ const submitButton = document.querySelector(".submitButton");
 const closeButton = document.querySelector(".closeButton");
 const clearButton = document.querySelector(".clearButton");
 const dialog = document.querySelector("dialog");
+const cardContainer = document.querySelector(".section-flex");
 let titleValue = document.querySelector("#title");
 let authorValue =  document.querySelector("#author");
 let startDateValue =  document.querySelector("#date-started");
 let endDateValue =  document.querySelector("#date-ended");
 let pagesReadValue =  document.querySelector("#pages-read");
 let allBooks = [];
+let tempBook = new Set();
 
 
 
@@ -23,7 +25,24 @@ function createBookObject(title = null, author=null, startDate=null, endDate=nul
 
 
 
+function createCardObject() {
 
+    this.createCard = function() {
+
+        //create div element
+        //give it a unique attribute (id, probably)
+        //insert it into cardContainer
+        //within div element, create microlayout for book properties as well as edit and remove buttons
+        //is this going to be a method in a larger card object constructor or will this just be a function to call on...?
+        let identifierNumber = 0;
+        let card = document.createElement("div");
+        card.setAttribute("class", "card-style");
+        card.setAttribute("id", 'identifier${++identiferNumber}');
+        cardContainer.append(card);
+
+
+    };
+}
 
 
 
@@ -49,8 +68,10 @@ submitButton.addEventListener("click", (e) => {
 
     let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value)
     allBooks.push(book);
+    tempBook.add(book);
     e.value = book;
     console.log(e.value);
+
     titleValue.value = null;
     authorValue.value = null;
     startDateValue.value = null ;
@@ -58,11 +79,19 @@ submitButton.addEventListener("click", (e) => {
     pagesReadValue.value = null;
 
     console.log(allBooks);
+    console.log(tempBook);
+
     e.preventDefault();
     dialog.close();
 
 });
 
-//NEXT STEP AFTER LUNCH: FIGURE OUT HOW TO PARSE INFORMATION OUT OF DIALOG ELEMENT
 
-//make it so clicking out of the dialog exits the dialog without saving or updating info
+
+
+let test = new createCardObject;
+test.createCard();
+
+
+let test2 = new createCardObject;
+test2.createCard();
