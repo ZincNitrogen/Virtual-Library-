@@ -10,30 +10,33 @@
     <body>
         <!--I want a horizantal scroller-->
         
+
+        
         <main class="main-flex">
             <header>
                 <button class="addButton" type="button">Add Book</button>
             </header>
+            
+            <dialog open>
+                <form class="the-form" autocomplete="on">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" value=""><br>
 
-            <dialog>
-                <form class ="the-form">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title"><br>
-
-                    <label for="author">Author</label>
-                    <input type="text" id="author" name="author"><br>
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" value=""><br>
 
                     <label for="date-started">Start Date:</label>
-                    <input type="date" id="date-started" name="date-started"><br>
+                    <input type="date" id="date-started" name="date-started" value=""><br>
 
-                    <label for="date-ended">End Date: </label>
-                    <input type="date" id="date-ended" name="date-ended"><br>
+                    <label for="date-ended">End Date:</label>
+                    <input type="date" id="date-ended" name="date-ended" value=""><br>
 
                     <label for="pages-read">Pages read:</label>
-                    <input type="number" id="pages-read" name="pages-read"><br>
+                    <input type="number" id="pages-read" name="pages-read" value=""><br>
 
-                    <button class="closeButton" type="button">Save</button>
-                    <button class="clearButton" type="button">Clear</button>
+                    <button class="submitButton" name="save-btn" type="submit" value="Save">Save</button>
+                    <button class="clearButton" name="clear-btn" type="reset" value="Clear">Clear</button>
+                    <button class="closeButton" name="close-btn" type="button" value="Cancel">Cancel</button>
                 </form>
             </dialog>
             
