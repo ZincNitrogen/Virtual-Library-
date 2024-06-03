@@ -1,0 +1,33 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+header {
+
+    font-size: 8rem;
+    /* border: 2px solid red; */
+
+}
+
+header > button {
+    margin-left: 2rem;
+    position: sticky;
+    left: 2rem;
+
+    /* border: 2px solid green; */
+
+}
+
+.main-flex {
+
+    width: 20000px;
+    border: 2px solid blue;
+}
+
+.the-form {
+    font-size: 4rem;
+    
+}
