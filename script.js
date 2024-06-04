@@ -9,8 +9,10 @@ let authorValue =  document.querySelector("#author");
 let startDateValue =  document.querySelector("#date-started");
 let endDateValue =  document.querySelector("#date-ended");
 let pagesReadValue =  document.querySelector("#pages-read");
+let imageValue = document.querySelector("#file-btn");
 let allBooks = [];
 let tempBook = new Set();
+
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -20,13 +22,14 @@ function getRndInteger(min, max) {
 
 
 
-function createBookObject(title = null, author=null, startDate=null, endDate=null, pagesRead=null, identifier=null) {
+function createBookObject(title = null, author=null, startDate=null, endDate=null, pagesRead=null, identifier=null, image=null) {
     this.title = title;
     this.author = author;
     this.startDate = startDate;
     this.endDate = endDate;
     this.pagesRead = pagesRead;
     this.identifier = identifier;
+    this.image = image;
 }
 
 
@@ -52,9 +55,18 @@ function createCardObject() {
 
             //microImage
 
-        let microImage = document.createElement("div");
+        // let microImage = document.createElement("div");
+        // microImage.setAttribute("id", "MicroImageStyle");
+        // microImage.setAttribute("class", "micro-layout-style");
+        // card.append(microImage);
+
+        let microImage = document.createElement("img");
         microImage.setAttribute("id", "MicroImageStyle");
         microImage.setAttribute("class", "micro-layout-style");
+        // microImage.setAttribute("src", "");
+        // microImage.setAttribute("alt", "");
+
+
         card.append(microImage);
 
 
@@ -115,22 +127,34 @@ submitButton.addEventListener("click", (e) => {
     /*get individual field data
     parse data into an object
     give e.value the value of that object.*/
+    
 
     let newCard = new createCardObject;
     let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead] = newCard.createCard();
-    let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier);
+    let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier, imageValue.value);
+    console.log(imageValue.value);
     allBooks.push(book);
     tempBook.add(book);
     e.value = book;
     // console.log(e.value);
 
+    imageValue.value = null;
     titleValue.value = null;
     authorValue.value = null;
     startDateValue.value = null ;
     endDateValue.value = null;
     pagesReadValue.value = null;
 
+
+    // console.log(imageValue);
     // microImage.append(book.) -> gotta get image from form, add it to book object, then put it in card 
+    microImage.setAttribute("src", book.image); //`${book.image}`
+    microImage.setAttribute("alt", `image alt: ${book.image}`);
+    
+    
+    
+    
+    
     microTitle.append(book.title);
     microAuthor.append(book.author);
     microStartDate.append(book.startDate);
@@ -146,8 +170,8 @@ submitButton.addEventListener("click", (e) => {
     dialog.close();
 
 });
-//at this point, card is created, and tempBook is loaded. Now I need to get the object from tempBook displayed into the card's microlayout.
 
+//fix over flow in layout item divs.
 
 
 
