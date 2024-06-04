@@ -12,25 +12,35 @@
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     width: 20000px;
 
 }
 
 header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
 
-    font-size: 8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 
-    /* border: 2px solid red; */
+    /* border: 2px solid red;  */
 
 }
 
 header > button {
+    font-size: 3rem;
+    padding: 1rem;
+
     margin-left: 2rem;
+    
     position: sticky;
     left: 2rem;
 
-    /* border: 2px solid green; */
+
+    /* border: 2px solid green;  */
 
 }
 
@@ -53,14 +63,14 @@ dialog {
     display: flex;
     flex-flow: row, wrap;
     justify-content: flex-start;
-    border: 2px dashed green;
+    /* border: 2px dashed green; */
 }
 
 /*TODO style div cards in a basic way (shape and size) */
 
 .card-style {
     
-    border: 2px double orange;
+    border: 2px double orange; 
     font-size: 4rem;
     height: 70rem;
     width: 45rem;
@@ -89,6 +99,8 @@ dialog {
     height: 28rem;
     width: 24rem;
     margin-top: 2rem;
+    border: 2px double red;
+
 }
 
 
@@ -98,12 +110,4 @@ dialog {
     height: 5rem;
     width: 30rem;
     margin-top: 2rem;
-}
-
-img {
-    height: 500px;
-    width: 500px;
-    margin-top: 2rem;
-    border: 2px double red;
-
 }

@@ -127,7 +127,9 @@ submitButton.addEventListener("click", (e) => {
     /*get individual field data
     parse data into an object
     give e.value the value of that object.*/
-    
+
+
+
 
     let newCard = new createCardObject;
     let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead] = newCard.createCard();
@@ -171,7 +173,14 @@ submitButton.addEventListener("click", (e) => {
 
 });
 
+
+//TODO:
 //fix over flow in layout item divs.
+//fix image uploading only showing alt
+//animate the dialog box
+//general styling
+//look into lazy loading images for website performance
+
 
 
 
