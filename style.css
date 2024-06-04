@@ -66,6 +66,37 @@ dialog {
     width: 45rem;
     margin-left: 2rem;
 
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: center;
+
 
 
 }
+
+
+.micro-layout-style{
+
+    border: 2px double purple;
+    
+
+}
+
+#MicroImageStyle {
+
+    font-size: 4rem;
+    height: 28rem;
+    width: 24rem;
+    margin-top: 2rem;
+}
+
+
+.MicroLayoutItemsStyle {
+
+    font-size: 4rem;
+    height: 5rem;
+    width: 30rem;
+    margin-top: 2rem;
+}
+
