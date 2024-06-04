@@ -33,6 +33,7 @@ function createBookObject(title = null, author=null, startDate=null, endDate=nul
 
 function createCardObject() {
 
+
     this.createCard = function() {
 
         //create div element
@@ -87,11 +88,12 @@ function createCardObject() {
         card.append(microPagesRead);
 
 
-        return card.getAttribute("id");
+        return [card.getAttribute("id"), microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead]
 
 
     };
 }
+
 
 
 
@@ -115,7 +117,8 @@ submitButton.addEventListener("click", (e) => {
     give e.value the value of that object.*/
 
     let newCard = new createCardObject;
-    let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, newCard.createCard())
+    let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead] = newCard.createCard();
+    let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier);
     allBooks.push(book);
     tempBook.add(book);
     e.value = book;
@@ -127,7 +130,14 @@ submitButton.addEventListener("click", (e) => {
     endDateValue.value = null;
     pagesReadValue.value = null;
 
-    // console.log(allBooks);
+    // microImage.append(book.) -> gotta get image from form, add it to book object, then put it in card 
+    microTitle.append(book.title);
+    microAuthor.append(book.author);
+    microStartDate.append(book.startDate);
+    microEndDate.append(book.endDate);
+    microPagesRead.append(book.pagesRead);
+
+     console.log(allBooks);
     // console.log(tempBook);
 
 
@@ -136,7 +146,7 @@ submitButton.addEventListener("click", (e) => {
     dialog.close();
 
 });
-//at this point, card is created, and tempBook is loaded. Now I need to get the object from tempBook displayed into the card.
+//at this point, card is created, and tempBook is loaded. Now I need to get the object from tempBook displayed into the card's microlayout.
 
 
 
