@@ -74,15 +74,15 @@ header > button {
 
 }
 
-#deleteChecked{
+#deleteCheckedbtn{
     font-size: 1rem;
-    left: 14rem;
+    left: 16rem;
 }
 
-#cancelDelete {
+#cancelDeletebtn {
     font-size: 1rem;
 
-    left: 39rem;
+    left: 23rem;
 
 }
 
@@ -124,7 +124,6 @@ dialog {
     width: 45rem;
     margin-top: 1.5rem;
     margin-left: 2rem;
-    margin-bottom: 2rem;
 
     display: flex;
     flex-flow: column wrap;

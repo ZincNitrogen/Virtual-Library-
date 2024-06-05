@@ -11,7 +11,10 @@ let startDateValue =  document.querySelector("#date-started");
 let endDateValue =  document.querySelector("#date-ended");
 let pagesReadValue =  document.querySelector("#pages-read");
 let imageValue = document.querySelector("#file-btn");
-let deleteCheckedButton = null;
+let deleteCheckedButton = document.querySelector("#deleteCheckedbtn");
+let cancelDeleteButton = document.querySelector("#cancelDeletebtn");
+
+
 let allBooks = [];
 let allCards = [];
 
@@ -227,28 +230,17 @@ deleteButton.addEventListener("click", (e) => {
 
 
     //make a "delete checked" button appear next ot the delete button that will delete all checked items.
-    if (deleteCheckedButton == null) {
+    if (deleteCheckedButton.hidden == true && cancelDeleteButton.hidden == true) {
 
-        deleteCheckedButton = document.createElement("button");
-        deleteCheckedButton.textContent = "Delete Checked";
-        deleteCheckedButton.setAttribute("id", "deleteChecked");
-
-        deleteButton.after(deleteCheckedButton);
-
-
-        //make a "cancel" button appear next ot the "delete checked" button that will go back to base state.
-        let cancelDeleteButton = document.createElement("button");
-        cancelDeleteButton.textContent = "Done";
-        cancelDeleteButton.setAttribute("id", "cancelDelete");
-
-        deleteCheckedButton.after(cancelDeleteButton);
+        deleteCheckedButton.hidden = false;
+        cancelDeleteButton.hidden = false;
 
 
 
         cancelDeleteButton.addEventListener("click", (e) => {
-            deleteCheckedButton.remove();
+            deleteCheckedButton.hidden = true;
 
-            cancelDeleteButton.remove();
+            cancelDeleteButton.hidden = true;
             
             for (let i of allCards) {
                 i.microCheckBox.style.visibility = "hidden";
@@ -256,7 +248,6 @@ deleteButton.addEventListener("click", (e) => {
 
             }
 
-            deleteCheckedButton = null;
             addButton.removeAttribute("disabled");
             deleteButton.removeAttribute("disabled");
     
