@@ -5,8 +5,22 @@
     box-sizing: border-box;
 }
 
+:root {
+
+    --BGgeneral: #E88D67;
+    --cardBG: #F3F7EC;
+    --lightblue: #006989 ;
+    --darkblue:#005C78;
+
+    /* https://colorhunt.co/palette/e88d67f3f7ec006989005c78 */
+
+}
 
 
+body{
+    background-color: var(--BGgeneral);
+
+}
 .main-flex {
 
     display: flex;
@@ -15,6 +29,8 @@
     /* border: 2px solid blue; */
     width: 20000px;
 
+    
+
 }
 
 header {
@@ -22,7 +38,6 @@ header {
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;
-
     margin-top: 2rem;
     margin-bottom: 1rem;
 
@@ -31,18 +46,47 @@ header {
 }
 
 header > button {
-    font-size: 3rem;
-    padding: 1rem;
-
-    margin-left: 2rem;
     
+    /* margin-left: 2rem; */
     position: sticky;
     left: 2rem;
+    background-color: var(--cardBG);
+    border:none;
+    box-shadow: 0.5rem 0.5rem  ;
+    border-radius: 1rem;
+    /* border: 0.1rem solid black; */
+
+
+
+    /* border-bottom: 7px solid black;  
+    border-right: 7px solid black;   */
+
+}
+
+
+.delButton {
+    
+    left: 9rem;   
+    /* margin-left: 1rem;  */
 
 
     /* border: 2px solid green;  */
 
 }
+
+#deleteChecked{
+    font-size: 1rem;
+    left: 14rem;
+}
+
+#cancelDelete {
+    font-size: 1rem;
+
+    left: 39rem;
+
+}
+
+
 
 dialog {
 
@@ -63,18 +107,24 @@ dialog {
     display: flex;
     flex-flow: row, wrap;
     justify-content: flex-start;
-     border: 2px dashed green; 
+    /* border: 2px dashed green;  */
 }
 
 /*TODO style div cards in a basic way (shape and size) */
 
 .card-style {
     
-    border: 2px double orange; 
+    border: 2px solid black; 
+
+    border-radius: 10rem;
+    box-shadow: 1rem -1rem  ;
+    background-color: var(--cardBG);
     font-size: 4rem;
     height: 70rem;
     width: 45rem;
+    margin-top: 1.5rem;
     margin-left: 2rem;
+    margin-bottom: 2rem;
 
     display: flex;
     flex-flow: column wrap;
@@ -88,7 +138,8 @@ dialog {
 
 .micro-layout-style{
 
-    border: 2px double purple;
+    /* border: 2px double purple; */
+    border: none;
     
 
 }
@@ -117,9 +168,7 @@ dialog {
     height: 3rem;
     width: 3rem;
     /* visibility:hidden; */
-
-
-    margin-right: 1.5rem;
-    margin-top: 2rem;
+    margin-right: 5rem;
+    margin-top: 5rem;
 
 }

@@ -231,12 +231,16 @@ deleteButton.addEventListener("click", (e) => {
 
         deleteCheckedButton = document.createElement("button");
         deleteCheckedButton.textContent = "Delete Checked";
+        deleteCheckedButton.setAttribute("id", "deleteChecked");
+
         deleteButton.after(deleteCheckedButton);
 
 
         //make a "cancel" button appear next ot the "delete checked" button that will go back to base state.
         let cancelDeleteButton = document.createElement("button");
         cancelDeleteButton.textContent = "Done";
+        cancelDeleteButton.setAttribute("id", "cancelDelete");
+
         deleteCheckedButton.after(cancelDeleteButton);
 
 
@@ -264,6 +268,8 @@ deleteButton.addEventListener("click", (e) => {
             for (let card of allCards){
                 if (card.microCheckBox.checked == true){
                     
+
+                    //***need to fix single delete: get index of card, add to array, if item in array is in allCards, delete from all cards then delete from array.
                     console.log(`${card.cardAttributeIdentifier} was deleted`);
                     
                     allCards.splice(allCards.indexOf(card), 1);
