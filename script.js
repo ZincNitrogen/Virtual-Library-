@@ -1,4 +1,5 @@
 const addButton = document.querySelector(".addButton");
+const deleteButton = document.querySelector(".delButton");
 const submitButton = document.querySelector(".submitButton");
 const closeButton = document.querySelector(".closeButton");
 const clearButton = document.querySelector(".clearButton");
@@ -10,8 +11,11 @@ let startDateValue =  document.querySelector("#date-started");
 let endDateValue =  document.querySelector("#date-ended");
 let pagesReadValue =  document.querySelector("#pages-read");
 let imageValue = document.querySelector("#file-btn");
+let deleteCheckedButton = null;
 let allBooks = [];
 let tempBook = new Set();
+let allCards = [];
+let checkboxesTrue = [];
 
 
 function getRndInteger(min, max) {
@@ -99,11 +103,20 @@ function createCardObject() {
         microPagesRead.setAttribute("class", "micro-layout-style MicroLayoutItemsStyle" )
         card.append(microPagesRead);
 
+            //microCheckBox
+        let microCheckBox = document.createElement("input");
+        microCheckBox.setAttribute("type", "checkbox");
+        microCheckBox.setAttribute("class", "checkbox-style");
+        microCheckBox.style.visibility = "hidden";
 
-        return [card.getAttribute("id"), microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead]
+        card.prepend(microCheckBox);
+
+
+        return [card.getAttribute("id"), microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead, microCheckBox]
 
 
     };
+
 }
 
 
@@ -135,9 +148,21 @@ submitButton.addEventListener("click", (e) => {
     if (titleValue.value) {
             
         let newCard = new createCardObject;
-        let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead] = newCard.createCard();
+        let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead, microCheckBox] = newCard.createCard();
+        newCard.microTitle = microTitle;
+        newCard.microAuthor = microAuthor
+        newCard.microStartDate = microStartDate
+        newCard.microEndDate = microEndDate
+        newCard.microPagesRead = microPagesRead
+        newCard.cardAttributeIdentifier = cardAttributeIdentifier;
+        newCard.microImage = microImage
+        newCard.microCheckBox = microCheckBox;
+
+        allCards.push(newCard); 
+
+
         let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier, imageValue.value);
-        console.log(imageValue.value);
+        // console.log(allCards); //main collection (1/2) - the card objects
         allBooks.push(book);
         tempBook.add(book);
         e.value = book;
@@ -169,11 +194,13 @@ submitButton.addEventListener("click", (e) => {
         microEndDate.append(book.endDate);
         microPagesRead.append(book.pagesRead);
 
-        console.log(allBooks);
-        console.log(tempBook);
 
 
-        // these comments mimic the function of dialog sending data somewhere. FOrm validation only works when mimic is off, but data only works when mimic is on. This will be fixed once backend is created.
+        console.log(allBooks); //main collection (2/2) - the book objects
+        // console.log(tempBook);
+
+
+        // these comments mimic the function of dialog sending data somewhere. Form validation only works when mimic is off, but data only works when mimic is on. This will be fixed once backend is created.
         e.preventDefault();
         dialog.close();
 
@@ -184,6 +211,91 @@ submitButton.addEventListener("click", (e) => {
 
 
 
+deleteButton.addEventListener("click", (e) => {
+
+    //put checkbox on every card
+
+    for (let i of allCards) {
+        i.microCheckBox.style.visibility = "visible";
+
+    }
+
+   
+
+    console.log(allCards);
+
+    addButton.setAttribute("disabled", "disabled");
+
+
+    //make other buttons unclickable
+
+    //make a "delete checked" button appear next ot the delete button that will delete all checked items.
+    if (deleteCheckedButton == null) {
+
+        deleteCheckedButton = document.createElement("button");
+        deleteCheckedButton.textContent = "Delete Checked";
+        deleteButton.after(deleteCheckedButton);
+
+
+
+
+        //make a "cancel" button appear next ot the "delete checked" button that will go back to base state.
+
+        
+        let cancelDeleteButton = document.createElement("button");
+        cancelDeleteButton.textContent = "Cancel";
+        deleteCheckedButton.after(cancelDeleteButton);
+
+
+
+
+
+
+
+
+        
+        cancelDeleteButton.addEventListener("click", (e) => {
+            deleteCheckedButton.remove();
+
+            cancelDeleteButton.remove();
+            
+        for (let i of allCards) {
+            i.microCheckBox.style.visibility = "hidden";
+
+        }
+
+        deleteCheckedButton = null;
+        addButton.removeAttribute("disabled");
+
+     })
+
+
+
+
+     
+
+    }
+
+
+    
+
+
+
+})
+
+
+
+
+
+// for (let i of allCards) {
+//     if (i.microCheckBox.checked == true) {
+//         checkboxesTrue.push(i.cardAttributeIdentifier); //might need async to do this part
+//         console.log(checkboxesTrue);
+//     }
+
+// }
+
+
 //TODO:
 //fix over flow in layout item divs.
 //fix image uploading only showing alt
@@ -191,3 +303,4 @@ submitButton.addEventListener("click", (e) => {
 //general styling
 //look into lazy loading images for website performance
 //might not need identifier..must test later.
+//need to add removal button.
