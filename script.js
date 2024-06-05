@@ -13,9 +13,7 @@ let pagesReadValue =  document.querySelector("#pages-read");
 let imageValue = document.querySelector("#file-btn");
 let deleteCheckedButton = null;
 let allBooks = [];
-let tempBook = new Set();
 let allCards = [];
-let checkBoxesTrue = [];
 
 
 function getRndInteger(min, max) {
@@ -164,7 +162,6 @@ submitButton.addEventListener("click", (e) => {
         let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier, imageValue.value);
         // console.log(allCards); //main collection (1/2) - the card objects
         allBooks.push(book);
-        tempBook.add(book);
         e.value = book;
         // console.log(e.value);
 
@@ -197,7 +194,6 @@ submitButton.addEventListener("click", (e) => {
 
 
         console.log(allBooks); //main collection (2/2) - the book objects
-        // console.log(tempBook);
 
 
         // these comments mimic the function of dialog sending data somewhere. Form validation only works when mimic is off, but data only works when mimic is on. This will be fixed once backend is created.
@@ -240,7 +236,7 @@ deleteButton.addEventListener("click", (e) => {
 
         //make a "cancel" button appear next ot the "delete checked" button that will go back to base state.
         let cancelDeleteButton = document.createElement("button");
-        cancelDeleteButton.textContent = "Cancel";
+        cancelDeleteButton.textContent = "Done";
         deleteCheckedButton.after(cancelDeleteButton);
 
 
@@ -252,7 +248,7 @@ deleteButton.addEventListener("click", (e) => {
             
             for (let i of allCards) {
                 i.microCheckBox.style.visibility = "hidden";
-                // i.microCheckBox.checked = false;
+                i.microCheckBox.checked = false;
 
             }
 
@@ -268,11 +264,10 @@ deleteButton.addEventListener("click", (e) => {
             for (let card of allCards){
                 if (card.microCheckBox.checked == true){
                     
-                    console.log(card.cardAttributeIdentifier);
+                    console.log(`{card.cardAttributeIdentifier} was deleted`);
                     
                     allCards.splice(allCards.indexOf(card), 1);
                     document.querySelector(`#${card.cardAttributeIdentifier}`).remove();
-                    console.log(allCards);
                                 
                 }
             }
@@ -311,6 +306,4 @@ deleteButton.addEventListener("click", (e) => {
 //animate the dialog box
 //general styling
 //look into lazy loading images for website performance
-//might not need identifier..must test later.
 
-//need to add removal button.
