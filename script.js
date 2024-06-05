@@ -15,7 +15,7 @@ let deleteCheckedButton = null;
 let allBooks = [];
 let tempBook = new Set();
 let allCards = [];
-let checkboxesTrue = [];
+let checkBoxesTrue = [];
 
 
 function getRndInteger(min, max) {
@@ -158,7 +158,7 @@ submitButton.addEventListener("click", (e) => {
         newCard.microImage = microImage
         newCard.microCheckBox = microCheckBox;
 
-        allCards.push(newCard); 
+        allCards.push(newCard); //this is where the DOM cards reside. Go here to delete them eventually
 
 
         let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier, imageValue.value);
@@ -214,7 +214,6 @@ submitButton.addEventListener("click", (e) => {
 deleteButton.addEventListener("click", (e) => {
 
     //put checkbox on every card
-
     for (let i of allCards) {
         i.microCheckBox.style.visibility = "visible";
 
@@ -222,12 +221,14 @@ deleteButton.addEventListener("click", (e) => {
 
    
 
-    console.log(allCards);
-
-    addButton.setAttribute("disabled", "disabled");
-
-
+    
+    
     //make other buttons unclickable
+    addButton.setAttribute("disabled", "disabled");
+    deleteButton.setAttribute("disabled", "disabled");
+
+        // console.log(allCards); // the card objects
+
 
     //make a "delete checked" button appear next ot the delete button that will delete all checked items.
     if (deleteCheckedButton == null) {
@@ -237,44 +238,60 @@ deleteButton.addEventListener("click", (e) => {
         deleteButton.after(deleteCheckedButton);
 
 
-
-
         //make a "cancel" button appear next ot the "delete checked" button that will go back to base state.
-
-        
         let cancelDeleteButton = document.createElement("button");
         cancelDeleteButton.textContent = "Cancel";
         deleteCheckedButton.after(cancelDeleteButton);
 
 
 
-
-
-
-
-
-        
         cancelDeleteButton.addEventListener("click", (e) => {
             deleteCheckedButton.remove();
 
             cancelDeleteButton.remove();
             
-        for (let i of allCards) {
-            i.microCheckBox.style.visibility = "hidden";
+            for (let i of allCards) {
+                i.microCheckBox.style.visibility = "hidden";
+                // i.microCheckBox.checked = false;
 
-        }
+            }
 
-        deleteCheckedButton = null;
-        addButton.removeAttribute("disabled");
+            deleteCheckedButton = null;
+            addButton.removeAttribute("disabled");
+            deleteButton.removeAttribute("disabled");
+    
 
-     })
+        })
+
+        deleteCheckedButton.addEventListener("click", (e)=>{
+
+            for (let card of allCards){
+                if (card.microCheckBox.checked == true){
+                    
+                    console.log(card.cardAttributeIdentifier);
+                    
+                    allCards.splice(allCards.indexOf(card), 1);
+                    document.querySelector(`#${card.cardAttributeIdentifier}`).remove();
+                    console.log(allCards);
+                                
+                }
+            }
+        
+        });
 
 
-
-
-     
 
     }
+
+    
+//need to create an async function that listens to checkboxes of allCards, searches for checked boxes, and dynamically updates an the checkBoxesTrue array with cards with checked boxes.
+//then, use the "delete Checked" button to delete all cards in that array.
+
+
+ 
+
+
+
 
 
     
@@ -287,14 +304,6 @@ deleteButton.addEventListener("click", (e) => {
 
 
 
-// for (let i of allCards) {
-//     if (i.microCheckBox.checked == true) {
-//         checkboxesTrue.push(i.cardAttributeIdentifier); //might need async to do this part
-//         console.log(checkboxesTrue);
-//     }
-
-// }
-
 
 //TODO:
 //fix over flow in layout item divs.
@@ -303,4 +312,5 @@ deleteButton.addEventListener("click", (e) => {
 //general styling
 //look into lazy loading images for website performance
 //might not need identifier..must test later.
+
 //need to add removal button.
