@@ -130,48 +130,58 @@ submitButton.addEventListener("click", (e) => {
 
 
 
+   //need to first check if  is in temtitle.Value.value is empty.
 
-    let newCard = new createCardObject;
-    let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead] = newCard.createCard();
-    let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier, imageValue.value);
-    console.log(imageValue.value);
-    allBooks.push(book);
-    tempBook.add(book);
-    e.value = book;
-    // console.log(e.value);
+    if (titleValue.value) {
+            
+        let newCard = new createCardObject;
+        let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead] = newCard.createCard();
+        let book = new createBookObject(titleValue.value, authorValue.value, startDateValue.value, endDateValue.value, pagesReadValue.value, cardAttributeIdentifier, imageValue.value);
+        console.log(imageValue.value);
+        allBooks.push(book);
+        tempBook.add(book);
+        e.value = book;
+        // console.log(e.value);
 
-    imageValue.value = null;
-    titleValue.value = null;
-    authorValue.value = null;
-    startDateValue.value = null ;
-    endDateValue.value = null;
-    pagesReadValue.value = null;
+        imageValue.value = null;
+        titleValue.value = null;
+        authorValue.value = null;
+        startDateValue.value = null ;
+        endDateValue.value = null;
+        pagesReadValue.value = null;
 
 
-    // console.log(imageValue);
-    // microImage.append(book.) -> gotta get image from form, add it to book object, then put it in card 
-    microImage.setAttribute("src", book.image); //`${book.image}`
-    microImage.setAttribute("alt", `image alt: ${book.image}`);
+
     
-    
-    
-    
-    
-    microTitle.append(book.title);
-    microAuthor.append(book.author);
-    microStartDate.append(book.startDate);
-    microEndDate.append(book.endDate);
-    microPagesRead.append(book.pagesRead);
-
-     console.log(allBooks);
-    // console.log(tempBook);
+        // console.log(imageValue);
+        // microImage.append(book.) -> gotta get image from form, add it to book object, then put it in card 
+        microImage.setAttribute("src", book.image); //`${book.image}`
+        microImage.setAttribute("alt", `image alt: ${book.image}`);
+        
+        
+        
 
 
+        
+        microTitle.append(book.title);
+        microAuthor.append(book.author);
+        microStartDate.append(book.startDate);
+        microEndDate.append(book.endDate);
+        microPagesRead.append(book.pagesRead);
 
-    e.preventDefault();
-    dialog.close();
+        console.log(allBooks);
+        console.log(tempBook);
 
-});
+
+        // these comments mimic the function of dialog sending data somewhere. FOrm validation only works when mimic is off, but data only works when mimic is on. This will be fixed once backend is created.
+        e.preventDefault();
+        dialog.close();
+
+    }
+
+    });
+
+
 
 
 //TODO:
@@ -180,10 +190,4 @@ submitButton.addEventListener("click", (e) => {
 //animate the dialog box
 //general styling
 //look into lazy loading images for website performance
-
-
-
-
-
-//need formvalidation so blank cards aren't created. try solving this with form validation alone.
 //might not need identifier..must test later.
