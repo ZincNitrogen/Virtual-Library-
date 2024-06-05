@@ -264,7 +264,7 @@ deleteButton.addEventListener("click", (e) => {
             for (let card of allCards){
                 if (card.microCheckBox.checked == true){
                     
-                    console.log(`{card.cardAttributeIdentifier} was deleted`);
+                    console.log(`${card.cardAttributeIdentifier} was deleted`);
                     
                     allCards.splice(allCards.indexOf(card), 1);
                     document.querySelector(`#${card.cardAttributeIdentifier}`).remove();
