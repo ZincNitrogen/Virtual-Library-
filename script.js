@@ -1,3 +1,4 @@
+const header = document.querySelector("header");
 const addButton = document.querySelector(".addButton");
 const deleteButton = document.querySelector(".delButton");
 const submitButton = document.querySelector(".submitButton");
@@ -121,6 +122,43 @@ function createCardObject() {
 }
 
 
+deleteButton.setAttribute("disabled", "disabled");
+
+
+header.addEventListener("pointerdown", (e) => {
+
+    if (e.target.tagName == "svg" && e.target.disabled != true ){
+        console.log("yay")
+        e.target.parentElement.style.boxShadow ="0.2rem 0.2rem inset";
+
+
+
+        
+    }else if (e.target.tagName == "button" && e.target.disabled != true ) {
+        e.target.style.boxShadow ="0.2rem 0.2rem inset";
+
+    }
+
+});
+
+header.addEventListener("pointerup", (e) => {
+
+    if (e.target.tagName == "svg" ){
+        console.log("yay")
+        e.target.parentElement.style.boxShadow ="0.5rem 0.5rem";
+
+
+
+        
+    }else if (e.target.tagName == "button" && e.target.disabled != true ) {
+        e.target.style.boxShadow ="0.5rem 0.5rem";
+
+    }
+
+});
+
+
+//ALL HEADER BUTTON click EVENTS CAN BE REFACTORED VIA EVENT DELEGATION****MUST DO
 
 
 addButton.addEventListener('click', (e) => {
@@ -147,6 +185,9 @@ submitButton.addEventListener("click", (e) => {
    //need to first check if  is in temtitle.Value.value is empty.
 
     if (titleValue.value) {
+
+        deleteButton.removeAttribute("disabled"); //maybe async is needed here to constantly check if cards exist and to update disability status of button based on existance of card objects...
+
             
         let newCard = new createCardObject;
         let [cardAttributeIdentifier, microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead, microCheckBox] = newCard.createCard();
@@ -206,6 +247,8 @@ submitButton.addEventListener("click", (e) => {
     }
 
     });
+
+
 
 
 
@@ -277,7 +320,7 @@ deleteButton.addEventListener("click", (e) => {
 
     
 //need to create an async function that listens to checkboxes of allCards, searches for checked boxes, and dynamically updates an the checkBoxesTrue array with cards with checked boxes.
-//then, use the "delete Checked" button to delete all cards in that array.
+//then, use the "delete Checked" button to delete all cards in that array. (UPDATE: LOL NO I DON'T THINK SO. I CAN HACK MY WAY AROUND ITTTT)
 
 
  
@@ -301,6 +344,5 @@ deleteButton.addEventListener("click", (e) => {
 //fix over flow in layout item divs.
 //fix image uploading only showing alt
 //animate the dialog box
-//general styling
 //look into lazy loading images for website performance
-
+//look into animating slight tilt of cards when scrolling. Want to make a sort of inertial effect
