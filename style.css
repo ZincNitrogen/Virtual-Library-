@@ -19,6 +19,8 @@
 
 body{
     background-color: var(--BGgeneral);
+    overflow-y: hidden;
+
 
 }
 .main-flex {
@@ -28,6 +30,8 @@ body{
     justify-content: flex-start;
     /* border: 2px solid blue; */
     /* width: 20000px; */
+
+    
 
     
 
@@ -132,6 +136,10 @@ dialog {
     flex-flow: column wrap;
     justify-content: flex-start;
     align-items: center;
+    /* rotate:0deg; */
+    /* transition: rotate 0.1s linear; */
+
+    /* define rotation and transition property and timing */
 
 
 
@@ -152,7 +160,7 @@ dialog {
     height: 28rem;
     width: 24rem;
     margin-top: 2rem;
-    border: 2px double red;
+    /* border: 2px double red; */
 
 }
 
@@ -174,3 +182,6 @@ dialog {
     margin-top: 5rem;
 
 }
+
+
+

@@ -6,6 +6,7 @@ const closeButton = document.querySelector(".closeButton");
 const clearButton = document.querySelector(".clearButton");
 const dialog = document.querySelector("dialog");
 const cardContainer = document.querySelector(".section-flex");
+const main = document.querySelector(".main-flex");
 let titleValue = document.querySelector("#title");
 let authorValue =  document.querySelector("#author");
 let startDateValue =  document.querySelector("#date-started");
@@ -14,6 +15,11 @@ let pagesReadValue =  document.querySelector("#pages-read");
 let imageValue = document.querySelector("#file-btn");
 let deleteCheckedButton = document.querySelector("#deleteCheckedbtn");
 let cancelDeleteButton = document.querySelector("#cancelDeletebtn");
+let cardStyle =null;
+let cleanUpArray = [];
+let secondArray =[];
+
+
 
 
 let allBooks = [];
@@ -55,6 +61,7 @@ function createCardObject() {
         card.setAttribute("id", `identifier${getRndInteger(0, 1000)}`);
         // console.log(card.getAttribute("id"));
         cardContainer.append(card);
+        cardStyle = document.querySelectorAll(".card-style");
 
 
         //microlayout
@@ -69,6 +76,8 @@ function createCardObject() {
         let microImage = document.createElement("img");
         microImage.setAttribute("id", "MicroImageStyle");
         microImage.setAttribute("class", "micro-layout-style");
+        microImage.setAttribute("src", "");
+
         // microImage.setAttribute("src", "");
         // microImage.setAttribute("alt", "");
 
@@ -109,17 +118,40 @@ function createCardObject() {
         let microCheckBox = document.createElement("input");
         microCheckBox.setAttribute("type", "checkbox");
         microCheckBox.setAttribute("class", "checkbox-style");
+        microCheckBox.checked = false;
         microCheckBox.style.visibility = "hidden";
 
         card.prepend(microCheckBox);
 
 
-        return [card.getAttribute("id"), microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead, microCheckBox]
+        return [card.getAttribute("id"), microImage, microTitle, microAuthor, microStartDate, microEndDate, microPagesRead, microCheckBox, cardStyle]
 
 
     };
 
 }
+
+//tilt animation not as smooth or sleek as I thought.
+// document.addEventListener("scroll", (e) => {
+
+//     console.log("i am scrolling");
+//     // access transitoin proeprty of rotation and give it new position.
+//     for (let i of cardStyle) {
+//         i.style.rotate= "3deg";
+
+//     }
+
+    
+    
+// });
+
+// document.addEventListener("scrollend", (e) => {
+//     for (let i of cardStyle) {
+//         i.style.rotate= "0deg";
+
+//     }
+// });
+
 
 
 deleteButton.setAttribute("disabled", "disabled");
@@ -221,8 +253,23 @@ submitButton.addEventListener("click", (e) => {
     
         // console.log(imageValue);
         // microImage.append(book.) -> gotta get image from form, add it to book object, then put it in card 
-        microImage.setAttribute("src", book.image); //`${book.image}`
-        microImage.setAttribute("alt", `image alt: ${book.image}`);
+      
+        if (microImage.getAttribute("src") == "") {
+            microImage.setAttribute("src", "./masahiro-miyagi-SUE-yUTqn7w-unsplash.jpg");
+
+        }else {
+            microImage.setAttribute("src", book.image); //`${book.image}`
+            microImage.setAttribute("alt", `image alt: ${book.image}`);
+            microImage.setAttribute("width", "50px");
+            microImage.setAttribute("height", "50px");
+            //console.log(book.image);
+    
+        }
+
+        
+
+        
+       
         
         
         
@@ -237,8 +284,7 @@ submitButton.addEventListener("click", (e) => {
 
 
 
-        console.log(allBooks); //main collection (2/2) - the book objects
-
+        // console.log(allBooks); //main collection (2/2) - the book objects
 
         // these comments mimic the function of dialog sending data somewhere. Form validation only works when mimic is off, but data only works when mimic is on. This will be fixed once backend is created.
         e.preventDefault();
@@ -298,19 +344,53 @@ deleteButton.addEventListener("click", (e) => {
         })
 
         deleteCheckedButton.addEventListener("click", (e)=>{
+            console.log(allCards);
 
-            for (let card of allCards){
+           for (let card of allCards){
                 if (card.microCheckBox.checked == true){
-                    
 
-                    //***need to fix single delete: get index of card, add to array, if item in array is in allCards, delete from all cards then delete from array.
-                    console.log(`${card.cardAttributeIdentifier} was deleted`);
+                    console.log(card);
                     
-                    allCards.splice(allCards.indexOf(card), 1);
+                    // console.log(card.cardAttributeIdentifier);
+                    // //***need to fix single delete: get index of card, add to array, if item in array is in allCards, delete from all cards then delete from array. 
+                    console.log(`${card.cardAttributeIdentifier} was deleted`);
+                    console.log(allCards.indexOf(card));
                     document.querySelector(`#${card.cardAttributeIdentifier}`).remove();
+                    //allCards[allCards.indexOf(card)] = undefined; //this is a hacky way of solving the deletion problem, it does not clear the allCard array.
+                    
+                    // allCards.splice(allCards.indexOf(card), 1);
+                
+
+
                                 
                 }
+
+                
+
             }
+          
+
+
+            /*for (let card of allCards){
+                if(card.microCheckBox.checked == true) {
+                    cleanUpArray.push(allCards.indexOf(card)); //pushes card object into cleanup array if that objects checkbox is checked
+                    secondArray.push(card.cardAttributeIdentifier); //pushed cards ID into second array
+                }
+
+            }
+
+            console.log(cleanUpArray);
+            console.log(secondArray); */
+
+
+            allCards.forEach(i => i.cardAttributeIdentifier == document.querySelector(`#${i.cardAttributeIdentifier}`) ? console.log("card exists") : allCards.splice(allCards.indexOf(i), 1)  ); //HOLY SHIT I THINK THIS SOLVES THE DELETE BUG!!!
+
+    
+            console.log(allCards);
+
+         
+
+
         
         });
 
@@ -346,3 +426,4 @@ deleteButton.addEventListener("click", (e) => {
 //animate the dialog box
 //look into lazy loading images for website performance
 //look into animating slight tilt of cards when scrolling. Want to make a sort of inertial effect
+//look into a "display mode" that goes from the beginning of the document to the end at a certain speed.
