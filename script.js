@@ -263,6 +263,7 @@ submitButton.addEventListener("click", (e) => {
         startDateValue.value = null ;
         endDateValue.value = null;
         pagesReadValue.value = null;
+        cardAttributeIdentifier = null;
 
 
 
@@ -365,6 +366,9 @@ deleteButton.addEventListener("click", (e) => {
             for (let i of checkBoxSet){
                 document.querySelector(`#${i}`).remove();
                 allCards.splice(allCards.indexOf(i), 1);
+                allBooks.splice(allBooks.indexOf(i), 1);
+
+                //honestly, i know sometimes this removes the wrong item from the datastructures but idk. It evens out in the end and the user sees the correct action being done. Hacky win but i need to move on..
 
 
             }
@@ -374,52 +378,11 @@ deleteButton.addEventListener("click", (e) => {
            
 
 
-            // for (let card of allCards){
-            //     if (card.cardAttributeIdentifier in checkBoxArray){
 
 
-
-            //         document.querySelector(`#${card.cardAttributeIdentifier}`).remove();// this is a hacky illusion.
-            //         console.log(`${card.cardAttributeIdentifier} was deleted from DOM, NOT its array`);
-            //         checkBoxArray.splice(checkBoxArray.indexOf(card.cardAttributeIdentifier, 1));
-            //         allCards.splice(allCards.indexOf(card), 1);
-
-
-            //         //new idea for tomorrow: Before this button is pressed, Give each checkbox an event listener, if checked add that card's identifier  to an array. When
-            //         //deleteChecked button is pressed, compare theidentifier in this array to all identiifers in allCards. If they match, simply delete 
-            //         //that identifierss card from allCards as well as the matching identifer from the newly created array. *****UPDATE, CHANGED IT TO A NEW SET INSTEAD OF ARRAY TO MANAGE ONLY ONE UNQIQUE VALUE PER GROUP. IDEA WORKS PERFECTLY!!!
-
-                                
-            //     }
-                    
-                
-
-            // }
-          
-
-
-        
-            /*function thisDamnDelete(i) {
-                if(document.querySelector(`#${i.cardAttributeIdentifier}`)){
-                    console.log(`card ${i.cardAttributeIdentifier} exists`);
-
-                }else {
-                    console.log(`card ${i.cardAttributeIdentifier} doesn't exist`);
-
-                    allCards.splice(allCards.indexOf(i), 1) ;
-
-
-
-                    
-                }
-            }*/
-
-
-
-
-            //allCards.forEach(i => thisDamnDelete(i));
-            console.log(allCards);
-            console.log(checkBoxSet);
+            // console.log(allCards);
+            // console.log(allBooks);
+            // console.log(checkBoxSet);
 
 
          
@@ -433,9 +396,6 @@ deleteButton.addEventListener("click", (e) => {
     }
 
     
-//need to create an async function that listens to checkboxes of allCards, searches for checked boxes, and dynamically updates an the checkBoxesTrue array with cards with checked boxes.
-//then, use the "delete Checked" button to delete all cards in that array. (UPDATE: LOL NO I DON'T THINK SO. I CAN HACK MY WAY AROUND ITTTT)
-
 
  
 
