@@ -22,6 +22,7 @@ let cardStyle =null;
 
 let allBooks = [];
 let allCards = [];
+let checkBoxSet =new Set;
 
 
 function getRndInteger(min, max) {
@@ -118,6 +119,18 @@ function createCardObject() {
         microCheckBox.setAttribute("class", "checkbox-style");
         microCheckBox.checked = false;
         microCheckBox.style.visibility = "hidden";
+        microCheckBox.addEventListener("click", e => {
+            if (checkBoxSet.has(card.getAttribute('id'))) {
+                checkBoxSet.delete(card.getAttribute("id"));
+
+            }else{
+                checkBoxSet.add(card.getAttribute("id"));
+
+            }
+
+            console.log(checkBoxSet);
+
+        })
 
         card.prepend(microCheckBox);
 
@@ -128,6 +141,8 @@ function createCardObject() {
     };
 
 }
+
+
 
 //tilt animation not as smooth or sleek as I thought.
 // document.addEventListener("scroll", (e) => {
@@ -149,6 +164,9 @@ function createCardObject() {
 
 //     }
 // });
+
+
+
 
 
 
@@ -344,24 +362,39 @@ deleteButton.addEventListener("click", (e) => {
         deleteCheckedButton.addEventListener("click", (e)=>{
             console.log(`prior to deletion: ${allCards.length}`);
 
-            for (let card of allCards){
-                if (card.microCheckBox.checked == true){
+            for (let i of checkBoxSet){
+                document.querySelector(`#${i}`).remove();
+                allCards.splice(allCards.indexOf(i), 1);
 
-                    // allCards.splice(allCards.indexOf(card), 1) ;
 
-                    document.querySelector(`#${card.cardAttributeIdentifier}`).remove();// this is a hacky illusion.
-                    console.log(`${card.cardAttributeIdentifier} was deleted from DOM, NOT its array`);
+            }
 
-                    //new idea for tomorrow: Before this button is pressed, Give each checkbox an event listener, if checked add that card's identifier  to an array. When
-                    //deleteChecked button is pressed, compare theidentifier in this array to all identiifers in allCards. If they match, simply delete 
-                    //that identifiers' card from allCards as well as the matching identifer from the newly created array.
+            checkBoxSet.clear();
+
+           
+
+
+            // for (let card of allCards){
+            //     if (card.cardAttributeIdentifier in checkBoxArray){
+
+
+
+            //         document.querySelector(`#${card.cardAttributeIdentifier}`).remove();// this is a hacky illusion.
+            //         console.log(`${card.cardAttributeIdentifier} was deleted from DOM, NOT its array`);
+            //         checkBoxArray.splice(checkBoxArray.indexOf(card.cardAttributeIdentifier, 1));
+            //         allCards.splice(allCards.indexOf(card), 1);
+
+
+            //         //new idea for tomorrow: Before this button is pressed, Give each checkbox an event listener, if checked add that card's identifier  to an array. When
+            //         //deleteChecked button is pressed, compare theidentifier in this array to all identiifers in allCards. If they match, simply delete 
+            //         //that identifierss card from allCards as well as the matching identifer from the newly created array. *****UPDATE, CHANGED IT TO A NEW SET INSTEAD OF ARRAY TO MANAGE ONLY ONE UNQIQUE VALUE PER GROUP. IDEA WORKS PERFECTLY!!!
 
                                 
-                }
+            //     }
                     
                 
 
-            }
+            // }
           
 
 
@@ -386,6 +419,8 @@ deleteButton.addEventListener("click", (e) => {
 
             //allCards.forEach(i => thisDamnDelete(i));
             console.log(allCards);
+            console.log(checkBoxSet);
+
 
          
 
