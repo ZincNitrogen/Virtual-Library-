@@ -16,8 +16,6 @@ let imageValue = document.querySelector("#file-btn");
 let deleteCheckedButton = document.querySelector("#deleteCheckedbtn");
 let cancelDeleteButton = document.querySelector("#cancelDeletebtn");
 let cardStyle =null;
-let cleanUpArray = [];
-let secondArray =[];
 
 
 
@@ -344,48 +342,49 @@ deleteButton.addEventListener("click", (e) => {
         })
 
         deleteCheckedButton.addEventListener("click", (e)=>{
-            console.log(allCards);
+            console.log(`prior to deletion: ${allCards.length}`);
 
-           for (let card of allCards){
+            for (let card of allCards){
                 if (card.microCheckBox.checked == true){
 
-                    console.log(card);
-                    
-                    // console.log(card.cardAttributeIdentifier);
-                    // //***need to fix single delete: get index of card, add to array, if item in array is in allCards, delete from all cards then delete from array. 
-                    console.log(`${card.cardAttributeIdentifier} was deleted`);
-                    console.log(allCards.indexOf(card));
-                    document.querySelector(`#${card.cardAttributeIdentifier}`).remove();
-                    //allCards[allCards.indexOf(card)] = undefined; //this is a hacky way of solving the deletion problem, it does not clear the allCard array.
-                    
-                    // allCards.splice(allCards.indexOf(card), 1);
-                
+                    // allCards.splice(allCards.indexOf(card), 1) ;
 
+                    document.querySelector(`#${card.cardAttributeIdentifier}`).remove();// this is a hacky illusion.
+                    console.log(`${card.cardAttributeIdentifier} was deleted from DOM, NOT its array`);
+
+                    //new idea for tomorrow: Before this button is pressed, Give each checkbox an event listener, if checked add that card's identifier  to an array. When
+                    //deleteChecked button is pressed, compare theidentifier in this array to all identiifers in allCards. If they match, simply delete 
+                    //that identifiers' card from allCards as well as the matching identifer from the newly created array.
 
                                 
                 }
-
+                    
                 
 
             }
           
 
 
-            /*for (let card of allCards){
-                if(card.microCheckBox.checked == true) {
-                    cleanUpArray.push(allCards.indexOf(card)); //pushes card object into cleanup array if that objects checkbox is checked
-                    secondArray.push(card.cardAttributeIdentifier); //pushed cards ID into second array
+        
+            /*function thisDamnDelete(i) {
+                if(document.querySelector(`#${i.cardAttributeIdentifier}`)){
+                    console.log(`card ${i.cardAttributeIdentifier} exists`);
+
+                }else {
+                    console.log(`card ${i.cardAttributeIdentifier} doesn't exist`);
+
+                    allCards.splice(allCards.indexOf(i), 1) ;
+
+
+
+                    
                 }
-
-            }
-
-            console.log(cleanUpArray);
-            console.log(secondArray); */
+            }*/
 
 
-            allCards.forEach(i => i.cardAttributeIdentifier == document.querySelector(`#${i.cardAttributeIdentifier}`) ? console.log("card exists") : allCards.splice(allCards.indexOf(i), 1)  ); //HOLY SHIT I THINK THIS SOLVES THE DELETE BUG!!!
 
-    
+
+            //allCards.forEach(i => thisDamnDelete(i));
             console.log(allCards);
 
          
@@ -425,5 +424,4 @@ deleteButton.addEventListener("click", (e) => {
 //fix image uploading only showing alt
 //animate the dialog box
 //look into lazy loading images for website performance
-//look into animating slight tilt of cards when scrolling. Want to make a sort of inertial effect
 //look into a "display mode" that goes from the beginning of the document to the end at a certain speed.
